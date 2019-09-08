@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>Call Test</title>
+        <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <link href=' https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                margin: 50px 0 0 0;
+                padding: 0;
+                width: 100%;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                text-align: center;
+                color: #aaa;
+                font-size: 18px;
+            }
+
+            h1 {
+                color: #719e40;
+                letter-spacing: -3px;
+                font-family: 'Lato', sans-serif;
+                font-size: 100px;
+                font-weight: 200;
+                margin-bottom: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Test Call Service</h1>
+        <div>Enter phone number with country code to call</div>
+        <form class="postData" action="http://localhost/call-app/public/">
+         <input type="number" name="phone" required style="padding:6px;height:40px;width:300px;border-radius:5px; border:solid 2px#719e40; margin-top:5px;"/> <br>
+         <button type="submit" class="smt" style="height:40px; width:300px; background-color:#719e40; color:#fff; border:solid 2px#719e40; margin-top:5px; font-weight:700;">CALL NOW <i class="fa fa-spin fa-spinner spin"></i></button>
+         <form>
+
+         <script>
+         $(document).ready(function(){
+            $(".spin").hide();
+           $(".postData").submit(function(){
+             $(".spin").show();
+             $(".smt").attr("disabled","disabled");
+            var data = $(this).serialize();
+            var action = $(this).attr('action');
+            $.post(action, data, function(o){
+              var response = JSON.parse(o);
+              if(response['code']==1){
+                window.alert("Call Placed");
+                $(".smt").removeAttr("disabled");
+                $(".spin").hide();
+              }else{
+                  console.log(response['error']);
+                  $(".smt").removeAttr("disabled");
+                  $(".spin").hide();
+              }
+            })
+            return false;
+           })
+         });
+         </script>
+    </body>
+</html>
