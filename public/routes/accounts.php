@@ -7,8 +7,9 @@ $app->group('/accounts', function () use ($app, $container) {
 
     $app->post('/validates/', function ($request, $response, array $args) use ($container) {
         try {
-                        }
-        } catch (Exception $ex) { 
+        
+        }
+        catch (Exception $ex) { 
 
        }
         echo json_encode($status);
@@ -16,7 +17,8 @@ $app->group('/accounts', function () use ($app, $container) {
     $app->post('/create/', function ($request, $response, array $args) use ($container) {
         $status = array();
         try {
-                } catch (Exception $e) {request";
+        }
+         catch (Exception $e) {
         }
         echo json_encode($status);
     });
